@@ -113,10 +113,10 @@ def resnet50(pretrained=False):
     if pretrained:
         try:
             model.load_state_dict(torch.load(
-                '../../../pretrained_model/resnet50-19c8e357.pth'), strict=False)
+                '../../pretrained_model/resnet50-19c8e357.pth'), strict=False)
         except:
             model.load_state_dict(model_zoo.load_url(
-                model_url, '../../../pretrained_model/'), strict=False)
+                model_url, '../../pretrained_model/'), strict=False)
     return model
 
 
