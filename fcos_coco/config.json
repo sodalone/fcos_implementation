@@ -1,7 +1,7 @@
 {
-    "train_path": "/mnt/file/学习/代码/dataset/pascal_voc_2012/VOC0712/VOC_trainval/JPEGImages",
+    "train_path": "/mnt/file/学习/代码/dataset/coco/train2017/",
     "train_anno": "annotation/train.txt",
-    "test_path": "/mnt/file/学习/代码/dataset/pascal_voc_2012/VOC0712/VOC_test/JPEGImages",
+    "test_path": "/mnt/file/学习/代码/dataset/coco/val2017/",
     "test_anno": "annotation/val.txt",
     "label_path": "annotation/label.txt",
     "coco_anno": "/mnt/file/学习/代码/dataset/coco/annotations/instances_val2017.json",

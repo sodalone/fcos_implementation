@@ -20,10 +20,10 @@ from model.fcos import Fcos
 from API.COCO_eval import COCO_eval
 
 with open('config.json', 'r') as f:
-    cfg = f.load(f)
+    cfg = json.load(f)
 
 with open(cfg['coco_table'], 'r') as f:
-    coco_table = f.load(f)
+    coco_table = json.load(f)
 
 os.environ['CUDA_VISIBLE_DEVICES'] = cfg['CUDA_VISIBLE_DEVICES']
 

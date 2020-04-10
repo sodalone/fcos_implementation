@@ -13,7 +13,6 @@
 import torch
 import json
 from model.fcos import get_pred
-from tqdm import tqdm
 
 class COCO_eval(object):
 
@@ -26,8 +25,7 @@ class COCO_eval(object):
     def start(self):
         with torch.no_grad():
             results = []
-            num = tqdm(range(len(self.test_data)))
-            for i in num:
+            for i in range(len(self.test_data)):
                 img, bbox, label, loc, scale = self.test_data[i]
                 img = img.cuda().view(1, img.shape[0], img.shape[1], img.shape[2])
                 loc = loc.cuda().view(1, -1)
@@ -55,5 +53,5 @@ class COCO_eval(object):
                             'bbox': box.tolist(),
                         }
                         results.append(image_result)
-                num.set_description()
+                print('step:%d/%d' % (i, len(self.test_data)), end='\r')
             json.dump(results, open('coco_bbox_results.json', 'w'), indent=4)
