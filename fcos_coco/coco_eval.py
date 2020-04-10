@@ -12,7 +12,7 @@
 import torch
 import json
 import os
-from pycocotools.coco import  COCO
+from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 
 from dataset.dataset import Data_Read
@@ -36,7 +36,8 @@ net.eval()
 test_data = Data_Read(cfg['test_path'], cfg['test_anno'], cfg['label_path'],
                       cfg['pic_size'], is_train=False)
 
-coco_evaler = COCO_eval(net, test_data, coco_table['val_image_ids'], coco_table['coco_labels'])
+coco_evaler = COCO_eval(net, test_data, coco_table['val_image_ids'], coco_table['coco_labels'],
+                        cfg['nms_th'], cfg['nms_iou'])
 
 coco_evaler.start()
 coco = COCO(cfg['coco_anno'])
@@ -46,4 +47,3 @@ coco_eval.params.imgIds = coco_table['val_image_ids']
 coco_eval.evaluate()
 coco_eval.accumulate()
 coco_eval.summarize()
-

@@ -16,11 +16,13 @@ from model.fcos import get_pred
 
 class COCO_eval(object):
 
-    def __init__(self, net, test_data, val_image_ids, coco_labels):
+    def __init__(self, net, test_data, val_image_ids, coco_labels, nms_th, nms_iou):
         self.net = net
         self.test_data = test_data
         self.val_image_ids = val_image_ids
         self.coco_labels = coco_labels
+        self.nms_th = nms_th
+        self.nms_iou = nms_iou
 
     def start(self):
         with torch.no_grad():
@@ -29,8 +31,7 @@ class COCO_eval(object):
                 img, bbox, label, loc, scale = self.test_data[i]
                 img = img.cuda().view(1, img.shape[0], img.shape[1], img.shape[2])
                 loc = loc.cuda().view(1, -1)
-                pred_cls_i, pred_cls_s, pred_reg_i = get_pred(self.net(img, loc),
-                                                            self.net.nms_th, self.net.nms_iou)
+                pred_cls_i, pred_cls_s, pred_reg_i = get_pred(self.net(img, loc), self.nms_th, self.nms_iou)
                 pred_cls_i = pred_cls_i[0].cpu()
                 pred_cls_s = pred_cls_s[0].cpu()
                 pred_reg_i = pred_reg_i[0].cpu()

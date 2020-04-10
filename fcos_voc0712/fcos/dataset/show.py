@@ -14,19 +14,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 from torchvision import transforms
 
-COLOR_TABLE = [
-    'Red', 'Green', 'Blue', 'Yellow',
-    'Purple', 'Orange', 'DarkGreen', 'Purple',
-    'YellowGreen', 'Maroon', 'Teal',
-    'DarkGoldenrod', 'Peru', 'DarkRed',
-    'AliceBlue', 'LightBlue', 'Cyan', 'Teal',
-    'SpringGreen', 'SeaGreen', 'Lime', 'DarkGreen',
-    'YellowGreen', 'Ivory', 'Olive',
-    'Orange', 'Tan', 'Peru', 'Seashell',
-    'Coral', 'RosyBrown', 'DarkRed',
-    'LightGrey', 'Gray'
-] * 10
-
+COLOR_TABLE = ['Red'] * 100
 
 def draw_bbox_text(drawObj, xmin, ymin, xmax, ymax, text, color, bd=2):
     drawObj.rectangle((xmin, ymin, xmax, ymin+bd), fill=color)
