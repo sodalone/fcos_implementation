@@ -33,15 +33,19 @@ net.load_state_dict(checkpoint['model'])
 net = net.cuda(cfg['device'][0])
 net.eval()
 
-test_data = Data_Read(cfg['test_path'], cfg['test_anno'], cfg['label_path'],
-                      cfg['pic_size'], is_train=False)
-
-coco_evaler = COCO_eval(net, test_data, coco_table['val_image_ids'], coco_table['coco_labels'],
-                        cfg['nms_th'], cfg['nms_iou'])
-
-coco_evaler.start()
 coco = COCO(cfg['coco_anno'])
-coco_pred = coco.loadRes('coco_bbox_results.json')
+
+try:
+    coco_pred = coco.loadRes('coco_bbox_results.json')
+except:
+    test_data = Data_Read(cfg['test_path'], cfg['test_anno'], cfg['label_path'],
+                      cfg['pic_size'], is_train=False)
+    
+    coco_evaler = COCO_eval(net, test_data, coco_table['val_image_ids'], coco_table['coco_labels'],
+                        cfg['nms_th'], cfg['nms_iou'])
+    coco_evaler.start()
+    coco_pred = coco.loadRes('coco_bbox_results.json')
+
 coco_eval = COCOeval(coco, coco_pred, 'bbox')
 coco_eval.params.imgIds = coco_table['val_image_ids']
 coco_eval.evaluate()
