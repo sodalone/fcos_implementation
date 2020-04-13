@@ -121,5 +121,9 @@ def resnet50(pretrained=False):
 
 
 if __name__ == "__main__":
-    a, b, c = resnet50()(torch.randn(1, 3, 641, 641))
+    net = resnet50().to('cuda:0')
+    a, b, c = net(torch.randn(1, 3, 641, 641).cuda())
     print(a.shape, b.shape, c.shape)
+    print('-'*20)
+    from torchsummary import summary
+    summary(net, (3,641,641))
