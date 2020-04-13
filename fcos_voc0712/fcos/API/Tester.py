@@ -13,7 +13,6 @@
 import torch
 from time import time
 import numpy as np
-from tqdm import tqdm
 
 from util.eval_ap import eval_ap
 from model.fcos import get_pred
