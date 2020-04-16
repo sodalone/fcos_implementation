@@ -13,16 +13,16 @@
 
     "epoch": 30,
     "train_batch": 16,
-    "test_batch": 10,
+    "test_batch": 16,
     "device": [0],
     "CUDA_VISIBLE_DEVICES" : "0",
-    "num_workers": 8,
+    "num_workers": 16,
 
     "lr_base": 0.01,
     "lr_alpha": 0.1,
     "warmup_step": 500,
     "warmup_factor": [1.0, 3.0],
-    "lr_schedule": [28000, 39000],
+    "lr_schedule": [27000, 37000],
     "momentum": 0.9,
     "weight_decay": 0.0001,
 
