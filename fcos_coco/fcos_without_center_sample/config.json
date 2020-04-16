@@ -1,0 +1,44 @@
+{
+    "train_path": "/mnt/file/学习/代码/dataset/coco/train2017/",
+    "train_anno": "annotation/train.txt",
+    "test_path": "/mnt/file/学习/代码/dataset/coco/val2017/",
+    "test_anno": "annotation/val.txt",
+    "label_path": "annotation/label.txt",
+    "coco_anno": "/mnt/file/学习/代码/dataset/coco/annotations/instances_val2017.json",
+    "coco_table": "annotation/coco_table.json",    
+    
+    "load": false,
+    "save": true,
+    "pretrained":true,
+    "freeze_bn": true,
+    "freeze_stage": 1,
+
+    "epoch": 24,
+    "train_batch": 8,
+    "test_batch": 8,
+    "device": [0],
+    "CUDA_VISIBLE_DEVICES" : "0",
+    "num_workers": 16,
+
+    "lr_base": 0.01,
+    "lr_alpha": 0.1,
+    "warmup_step": 500,
+    "warmup_factor": [1.0, 3.0],
+    "lr_schedule": [240000, 320000],
+    "momentum": 0.9,
+    "weight_decay": 0.0001,
+
+    "pic_size": 1025,
+    "class": 80,
+    "pic": [129, 65, 33, 17, 9],
+
+    "arae_th": 32,
+    "grad_clip": 3,
+    "nms_th": 0.05,
+    "nms_iou": 0.6,
+
+    "img_minscale": 0.8,
+    "is_augmentation": true,
+    "is_normalize": true,
+    "seed": 0
+}
