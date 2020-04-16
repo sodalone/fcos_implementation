@@ -83,7 +83,7 @@ if cfg['load']:
     trainer.epoch = checkpoint['epoch']
 
 
-while trainer.epoch <= cfg['epoch']:
+while trainer.epoch < cfg['epoch']:
 
     net.module.backbone.freeze_stages(cfg['freeze_stage'])
     if cfg['freeze_bn']:
