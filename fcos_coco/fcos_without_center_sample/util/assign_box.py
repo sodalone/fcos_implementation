@@ -47,12 +47,9 @@ def assign_box_cupy(label_cls, label_box, locals, size, pic, ltrb_min, ltrb_max,
                 float right = xmax_t - x;
                 float bottom = ymax_t - y;
                 float max_ltrb = max(left, max(top, max(right, bottom)));
-                float cx = (xmin_t + xmax_t) / 2.0;
-                float cy = (ymin_t + ymax_t) / 2.0;
-                float distance = (x-cx)*(x-cx)+(y-cy)*(y-cy);
                 float box_area = (xmax_t - xmin_t) * (ymax_t - ymin_t);
                 if (left > 0 && top > 0 && right > 0 && bottom > 0 && max_ltrb > ltrb_min &&
-                    max_ltrb < ltrb_max && distance < r*r && box_area <= pred_area){
+                    max_ltrb < ltrb_max && box_area <= pred_area){
                         pred_area = box_area;
                         pred_cls = label_cls[b*n_max+n];
                         pred_xmin = xmin_t;
@@ -131,15 +128,11 @@ def assign_box(label_cls, label_box, locals, size, pic, ltrb_min, ltrb_max, r):
                         max_ltrb = max(top, max(bottom, max(left, right)))
                         if (top > 0 and bottom > 0 and left > 0 and right > 0 and
                                 max_ltrb > ltrb_min and max_ltrb < ltrb_max):
-                            center_y = (ymin + ymax) / 2.0
-                            center_x = (xmin + xmax) / 2.0
-                            distance = (y - center_y)**2 + (x - center_x)**2
-                            if distance < r**2:
-                                box_area = (ymax - ymin) * (xmax - xmin)
-                                if box_area <= pred_area:
-                                    pred_area = box_area
-                                    pred_cls = label_cls[b][n]
-                                    pred_box = label_box[b][n]
+                            box_area = (ymax - ymin) * (xmax - xmin)
+                            if box_area <= pred_area:
+                                pred_area = box_area
+                                pred_cls = label_cls[b][n]
+                                pred_box = label_box[b][n]
                     if pred_cls > 0:
                         cls_out[b][i][j] = pred_cls
                         box_out[b][i][j] = pred_box

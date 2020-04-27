@@ -47,8 +47,6 @@ def assign_box_cupy(label_cls, label_box, locals, size, pic, ltrb_min, ltrb_max,
                 float right = xmax_t - x;
                 float bottom = ymax_t - y;
                 float max_ltrb = max(left, max(top, max(right, bottom)));
-                float cx = (xmin_t + xmax_t) / 2.0;
-                float cy = (ymin_t + ymax_t) / 2.0;
                 float box_area = (xmax_t - xmin_t) * (ymax_t - ymin_t);
                 if (left > 0 && top > 0 && right > 0 && bottom > 0 && max_ltrb > ltrb_min &&
                     max_ltrb < ltrb_max && box_area <= pred_area){
