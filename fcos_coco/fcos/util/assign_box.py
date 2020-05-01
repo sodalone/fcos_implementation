@@ -113,6 +113,7 @@ def assign_box(label_cls, label_box, locals, size, pic, ltrb_min, ltrb_max, r):
     scale = int((size - 1) / (pic - 1))
     batch_size, n_max = label_cls.shape
     cls_out = np.zeros((batch_size, pic, pic))
+    center_out = np.zeros((batch_size, pic, pic))
     box_out = np.zeros((batch_size, pic, pic, 4))
 
     for b in range(batch_size):
@@ -140,10 +141,16 @@ def assign_box(label_cls, label_box, locals, size, pic, ltrb_min, ltrb_max, r):
                                     pred_area = box_area
                                     pred_cls = label_cls[b][n]
                                     pred_box = label_box[b][n]
+                                    pred_left = left
+                                    pred_right = right
+                                    pred_top = top
+                                    pred_bottom = bottom
                     if pred_cls > 0:
                         cls_out[b][i][j] = pred_cls
                         box_out[b][i][j] = pred_box
+                        center_out[b][i][j] = sqrt((min(pred_left, pred_right) / max(pred_left, pred_right)) * 
+                                (min(pred_top, pred_bottom) / max(pred_top, pred_bottom)))
 
                 else:
                     cls_out[b][i][j] = -1
-    return torch.from_numpy(cls_out).long().to(device), torch.from_numpy(box_out).float().to(device)
+    return torch.from_numpy(cls_out).long().to(device), torch.from_numpy(center_out).float().to(device), torch.from_numpy(box_out).float().to(device)

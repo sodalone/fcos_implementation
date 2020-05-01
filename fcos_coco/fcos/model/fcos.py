@@ -12,7 +12,7 @@ fcos主网络
 import math
 import numpy as np
 from time import time
-from util.assign_box import assign_box_cupy
+from util.assign_box import assign_box_cupy, assign_box
 from util.focal_loss import focal_loss
 from util.iou_loss import iou_loss
 from util.BCE_loss import BCE_loss
