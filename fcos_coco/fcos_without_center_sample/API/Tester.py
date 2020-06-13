@@ -66,7 +66,7 @@ class Tester(object):
             map_mean = ap_sum / len(ap)
             map_50 = ap[0]['map']
             map_75 = ap[5]['map']
-            print('map_mean: %f, map_50: %f, map_75: %f' %
+            print('ap_mean: %f, ap_50: %f, ap_75: %f' %
                   (map_mean, map_50, map_75))
             self.net.train()
             return map_mean, map_50, map_75
